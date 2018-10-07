@@ -2,31 +2,23 @@ package parole.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Parole {
 	
 	private ArrayList<String> elenco;
-	private Comparator<String> confronto;
 	
 	public Parole() {
 		elenco = new ArrayList<String>();
-		confronto = new Comparator<String>() {
-
-			@Override
-			public int compare(String arg0, String arg1) {
-				return arg0.compareToIgnoreCase(arg1);
-			}
-		};
 	}
 	
 	public void addParola(String p) {
 		elenco.add(p);
-		Collections.sort(elenco, confronto);
+		Collections.sort(elenco);
+		ordine();
 	}
 	
 	public ArrayList<String> getElenco() {
-		Collections.sort(elenco, confronto);
+		ordine();
 		return elenco;
 	}
 	
@@ -43,6 +35,12 @@ public class Parole {
 	
 	public void eliminaParola(String parola) {
 		elenco.remove(parola);
+	}
+	
+	private void ordine() {
+		Collections.sort(elenco);
+		Collections.reverse(elenco);
+		Collections.sort(elenco, String.CASE_INSENSITIVE_ORDER);
 	}
 
 }
