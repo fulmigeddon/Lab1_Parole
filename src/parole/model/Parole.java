@@ -2,22 +2,31 @@ package parole.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Parole {
 	
 	private ArrayList<String> elenco;
+	private Comparator<String> confronto;
 	
 	public Parole() {
 		elenco = new ArrayList<String>();
+		confronto = new Comparator<String>() {
+
+			@Override
+			public int compare(String arg0, String arg1) {
+				return arg0.compareToIgnoreCase(arg1);
+			}
+		};
 	}
 	
 	public void addParola(String p) {
 		elenco.add(p);
-		Collections.sort(elenco);
+		Collections.sort(elenco, confronto);
 	}
 	
 	public ArrayList<String> getElenco() {
-		Collections.sort(elenco);
+		Collections.sort(elenco, confronto);
 		return elenco;
 	}
 	
